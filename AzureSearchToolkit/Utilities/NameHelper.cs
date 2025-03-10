@@ -10,10 +10,18 @@ namespace AzureSearchToolkit.Utilities
         public static string GetMemberName(MemberInfo member)
         {
             var jsonPropertyAttribute = member.GetCustomAttribute<JsonPropertyAttribute>();
-            if (jsonPropertyAttribute != null) return jsonPropertyAttribute.PropertyName;
+
+            if (jsonPropertyAttribute != null)
+            {
+                return jsonPropertyAttribute.PropertyName;
+            }
 
             var camelCaseAttribute = member.DeclaringType.GetCustomAttribute<SerializePropertyNamesAsCamelCaseAttribute>();
-            if (camelCaseAttribute != null) return MappingHelper.ToCamelCase(member.Name);
+
+            if (camelCaseAttribute != null)
+            {
+                return MappingHelper.ToCamelCase(member.Name);
+            }
 
             return member.Name;
         }
